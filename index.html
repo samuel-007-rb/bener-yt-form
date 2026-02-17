@@ -1,186 +1,46 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulário ADM | BENER YT</title>
+<script>
+const form = document.getElementById("admForm");
+const success = document.getElementById("successMsg");
 
-  <!-- Fonte moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-  <!-- Ícone Discord -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  const inputs = form.querySelectorAll("input, textarea, select");
 
-  <style>
-    :root {
-      --bg: #121212;
-      --card: #1e1e1e;
-      --gold: #d4af37;
-      --text: #f1f1f1;
-      --muted: #aaaaaa;
-    }
+  const mensagem = {
+    content: `📋 **NOVA INSCRIÇÃO – ADM BENER YT**
 
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+👤 **Nick:** ${inputs[0].value}
+🎂 **Idade:** ${inputs[1].value}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      padding: 30px;
-    }
+🛡️ **Experiência:**  
+${inputs[2].value}
 
-    .container {
-      width: 100%;
-      max-width: 700px;
-      background: var(--card);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    }
+⏰ **Atividade diária:**  
+${inputs[3].value}
 
-    h1 {
-      text-align: center;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
+⚠️ **Conflitos:**  
+${inputs[4].value}
 
-    .subtitle {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 30px;
-    }
+⭐ **Motivo:**  
+${inputs[5].value}
 
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
+🚫 **Abuso de poder:**  
+${inputs[6].value}
 
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #333;
-      background: #181818;
-      color: var(--text);
-      margin-bottom: 20px;
-      resize: vertical;
-    }
+📜 **Aceita regras:** ${inputs[7].value}
 
-    input:focus, textarea:focus, select:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
+📝 **Extra:**  
+${inputs[8].value || "Nada informado"}`
+  };
 
-    button {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      background: var(--gold);
-      color: #000;
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    button:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 15px rgba(212,175,55,0.6);
-    }
-
-    .success {
-      display: none;
-      margin-top: 20px;
-      text-align: center;
-      color: #4caf50;
-      font-weight: 600;
-    }
-
-    .discord-icon {
-      text-align: center;
-      font-size: 30px;
-      color: var(--gold);
-      margin-bottom: 15px;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <div class="discord-icon">
-      <i class="fab fa-discord"></i>
-    </div>
-
-    <h1>📋 FORMULÁRIO – ADMINISTRADOR | BENER YT</h1>
-    <p class="subtitle">Preencha com atenção. Suas respostas serão analisadas pela equipe.</p>
-
-    <form id="admForm">
-      <label>Nome / Nick no Discord</label>
-      <input type="text" required>
-
-      <label>Idade</label>
-      <input type="number" min="10" required>
-
-      <label>Já foi ADM ou STAFF em outro servidor? Se sim, qual(is)?</label>
-      <textarea rows="3" required></textarea>
-
-      <label>Quanto tempo por dia você fica ativo(a) no Discord?</label>
-      <input type="text" required>
-
-      <label>Você sabe lidar com brigas, denúncias e conflitos no servidor? Explique:</label>
-      <textarea rows="4" required></textarea>
-
-      <label>Por que você quer ser ADM do servidor BENER YT?</label>
-      <textarea rows="4" required></textarea>
-
-      <label>O que você faria se visse um ADM abusando do poder?</label>
-      <textarea rows="4" required></textarea>
-
-      <label>Você conhece e aceita seguir todas as regras do servidor?</label>
-      <select required>
-        <option value="">Selecione</option>
-        <option>Sim</option>
-        <option>Não</option>
-      </select>
-
-      <label>Algo a mais que queira acrescentar? (Opcional)</label>
-      <textarea rows="3"></textarea>
-
-      <button type="submit">ENVIAR FORMULÁRIO</button>
-    </form>
-
-    <div class="success" id="successMsg">
-      ✅ Formulário enviado com sucesso! Boa sorte ❤️
-    </div>
-  </div>
-
-  <script>
-    const form = document.getElementById('admForm');
-    const success = document.getElementById('successMsg');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      // Aqui você pode integrar com Discord Webhook ou banco de dados
-      // fetch("WEBHOOK_AQUI", { method: "POST", body: JSON.stringify(dados) })
-
-      success.style.display = 'block';
-      form.reset();
-    });
-  </script>
-
-</body>
-</html>
+  fetch("https://discordapp.com/api/webhooks/1473459224767107124/bTdo7L5yB2_yPc7nnVIKrFqf1X0GoqwXMIE_TXBzrRVbhXPFl1sxCKP5C5Xff89wlqGX", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(mensagem)
+  }).then(() => {
+    success.style.display = "block";
+    form.reset();
+  });
+});
+</script>
